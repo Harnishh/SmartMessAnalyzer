@@ -16,7 +16,8 @@ public class main {
             System.out.println("1. Add Feedback");
             System.out.println("2. View All Feedback");
             System.out.println("3. Average Rating");
-            System.out.println("4. Exit");
+            System.out.println("4. Analyze Comments");
+            System.out.println("5. Exit");
 
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -32,16 +33,18 @@ public class main {
                 calculateAverage();
             } 
             else if (choice == 4) {
+                Analyzer.analyzeComments(feedbacks);
+            } 
+            else if (choice == 5) {
                 System.out.println("Program ended.");
             } 
             else {
-                System.out.println("Wrong choice, try again.");
+                System.out.println("Invalid choice, try again.");
             }
 
-        } while (choice != 4);
+        } while (choice != 5);
     }
 
-    
     public static void addFeedback() {
 
         System.out.print("Enter food name: ");
@@ -59,14 +62,13 @@ public class main {
 
         id++; 
 
-        System.out.println("Feedback saved successfully!");
+        System.out.println("Feedback added successfully!");
     }
 
-    
     public static void showFeedback() {
 
         if (feedbacks.size() == 0) {
-            System.out.println("No feedback given yet.");
+            System.out.println("No feedback available.");
             return;
         }
 
@@ -78,7 +80,6 @@ public class main {
         }
     }
 
-    
     public static void calculateAverage() {
 
         if (feedbacks.size() == 0) {
@@ -89,7 +90,7 @@ public class main {
         int total = 0;
 
         for (Feedback f : feedbacks) {
-            total = total + f.rating;
+            total += f.rating;
         }
 
         double avg = (double) total / feedbacks.size();
